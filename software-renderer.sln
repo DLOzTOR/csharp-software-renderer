@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "software-renderer", "software-renderer\software-renderer.csproj", "{50CBB3A7-8543-4F70-9752-197EDF5FA1E5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{50CBB3A7-8543-4F70-9752-197EDF5FA1E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50CBB3A7-8543-4F70-9752-197EDF5FA1E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50CBB3A7-8543-4F70-9752-197EDF5FA1E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50CBB3A7-8543-4F70-9752-197EDF5FA1E5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
