@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using SoftwareRenderer.Assets;
+using SoftwareRenderer.IO.Graphics.Models;
 using SoftwareRenderer.MathExt;
 
 namespace SoftwareRenderer.Render;
@@ -16,6 +17,7 @@ public class Renderer
     
     public void DrawLine(Vec2i start, Vec2i end, int color)
     {
+        Console.WriteLine($"{start} | {end}");
         int d_x = end.X - start.X;
         int d_y = end.Y - start.Y;
         if (Math.Abs(d_y) < Math.Abs(d_x))
@@ -69,6 +71,34 @@ public class Renderer
         }
     }
 
+    public void DrawWiredModel(string path)
+    {
+        var tris = ObjLoader.GetLines(path);
+        int c = 0xFFFFFF;
+        Vec2i screen_size = new Vec2i(
+            target.Width,
+            target.Height
+        );
+        for (int i = 0; i < tris.Count; i += 3)
+        {
+            DrawLine(
+                Vec2i.Vec3fToScreenPoint(tris[i], screen_size), 
+                Vec2i.Vec3fToScreenPoint(tris[i+1], screen_size), 
+                c
+                );
+            DrawLine(
+                Vec2i.Vec3fToScreenPoint(tris[i], screen_size), 
+                Vec2i.Vec3fToScreenPoint(tris[i+2], screen_size), 
+                c
+            );
+            DrawLine(
+                Vec2i.Vec3fToScreenPoint(tris[i+1], screen_size), 
+                Vec2i.Vec3fToScreenPoint(tris[i+2], screen_size), 
+                c
+            );
+        }
+    }
+    
     public void DrawTriangle(Vec2i p1, Vec2i p2, Vec2i p3)
     {
         

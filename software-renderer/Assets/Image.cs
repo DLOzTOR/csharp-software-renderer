@@ -17,10 +17,10 @@ public struct Image
 
     public void Clear(int color)
     {
-        int size = Width * Height;
-        for (int i = 0; i < size; i++)
-        {
-            Data[i] = color;
-        }
+        // int size = Width * Height;
+        // for (int i = 0; i < size; i++)
+        // {
+        //     Data[i] = color;
+        // }
     }
 }

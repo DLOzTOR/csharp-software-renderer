@@ -1,6 +1,6 @@
 ﻿namespace SoftwareRenderer.MathExt;
 
-public class Vec3f(float x, float y, float z)
+public struct Vec3f(float x, float y, float z)
 {
     public float X = x;
     public float Y = y;

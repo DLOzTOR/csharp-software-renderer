@@ -20,10 +20,10 @@ class Program
 
     static void ObjLoaderTest()
     {
-        foreach (Vec3f point in ObjLoader.GetLines("Resources/Models/monkey.obj"))
-        {
-            Console.WriteLine(point);
-        }
+        Image img = new Image(size, size);
+        Renderer renderer = new Renderer(img);
+        renderer.DrawWiredModel("Resources/Models/monkey.obj");
+        DrawImage(ref img);
     }
     
     static void SomeTests()
