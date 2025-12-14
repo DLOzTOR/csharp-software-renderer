@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using SoftwareRenderer.Assets;
 using SoftwareRenderer.IO.Graphics.Images;
+using SoftwareRenderer.IO.Graphics.Models;
 using SoftwareRenderer.MathExt;
 using SoftwareRenderer.Render;
 
@@ -13,6 +14,19 @@ class Program
     static int imageWritten = 0;
     static TgaImageWriter writer = new TgaImageWriter();
     static void Main(string[] args)
+    {
+        ObjLoaderTest();
+    }
+
+    static void ObjLoaderTest()
+    {
+        foreach (Vec3f point in ObjLoader.GetLines("Resources/Models/monkey.obj"))
+        {
+            Console.WriteLine(point);
+        }
+    }
+    
+    static void SomeTests()
     {
         Image img = new Image(size, size);
         Renderer renderer = new Renderer(img);
@@ -40,7 +54,8 @@ class Program
         
         Console.WriteLine($"{stopWatch.ElapsedMilliseconds} ms");
     }
-
+    
+    
     static void DrawImage(ref Image img)
     {
         writer.WriteTrueColor($"./out/img{++imageWritten:D2}.tga", img);
