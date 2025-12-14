@@ -1,11 +1,11 @@
 ﻿namespace SoftwareRenderer.MathExt;
-
-public struct Vector2i
+//vector of 2 integer values
+public struct Vec2i
 {
     public int X;
     public int Y;
 
-    public Vector2i(int x, int y)
+    public Vec2i(int x, int y)
     {
         X = x;
         Y = y;

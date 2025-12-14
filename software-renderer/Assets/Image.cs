@@ -14,4 +14,13 @@ public struct Image
         Height = height;
         Data = new int[width * height];
     }
+
+    public void Clear(int color)
+    {
+        int size = Width * Height;
+        for (int i = 0; i < size; i++)
+        {
+            Data[i] = color;
+        }
+    }
 }
