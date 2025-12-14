@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using SoftwareRenderer.Assets;
 using SoftwareRenderer.MathExt;
 
@@ -12,7 +13,7 @@ public class Renderer
     {
         this.target = target;
     }
-
+    
     public void DrawLine(Vec2i start, Vec2i end, int color)
     {
         int d_x = end.X - start.X;
@@ -29,13 +30,14 @@ public class Renderer
             int delta_err = d_y;
             int step = end.Y > start.Y ? 1 : -1;
             int row = start.Y * target.Width;
+            int row_step = step * target.Width;
             for (int x = start.X; x <= end.X; x++)
             {
                 target.Data[row + x] = color;
                 err += delta_err;
-                if (2 * err >= d_x)
+                if ((err << 1) >= d_x)
                 {
-                    row += step * target.Width;
+                    row += row_step;
                     err -= d_x;
                 }
             }
@@ -52,15 +54,17 @@ public class Renderer
             int delta_err = d_x;
             int x = start.X;
             int step = end.X > start.X ? 1 : -1;
+            int row = start.Y * target.Width;
             for (int y = start.Y; y <= end.Y; y++)
             {
-                target.Data[y * target.Width + x] = color;
+                target.Data[row + x] = color;
                 err += delta_err;
-                if (2 * err >= d_y)
+                if ((err << 1) >= d_y)
                 {
                     x += step;
                     err -= d_y;
                 }
+                row += target.Width;
             }
         }
     }
