@@ -27,7 +27,7 @@ public class Renderer
             }
             d_y = Math.Abs(end.Y - start.Y);
             int err = 0;
-            int delta_err = d_y;
+            int delta_err = 2 * d_y;
             int step = end.Y > start.Y ? 1 : -1;
             int row = start.Y * target.Width;
             int row_step = step * target.Width;
@@ -35,10 +35,10 @@ public class Renderer
             {
                 target.Data[row + x] = color;
                 err += delta_err;
-                if ((err << 1) >= d_x)
+                if (err >= d_x)
                 {
                     row += row_step;
-                    err -= d_x;
+                    err -= d_x * 2;
                 }
             }
         }
@@ -51,7 +51,7 @@ public class Renderer
             }
             d_x = Math.Abs(end.X - start.X);
             int err = 0;
-            int delta_err = d_x;
+            int delta_err = 2 * d_x;
             int x = start.X;
             int step = end.X > start.X ? 1 : -1;
             int row = start.Y * target.Width;
@@ -59,10 +59,10 @@ public class Renderer
             {
                 target.Data[row + x] = color;
                 err += delta_err;
-                if ((err << 1) >= d_y)
+                if (err >= d_y)
                 {
                     x += step;
-                    err -= d_y;
+                    err -= d_y * 2;
                 }
                 row += target.Width;
             }
