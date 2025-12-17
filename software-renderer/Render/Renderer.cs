@@ -17,7 +17,6 @@ public class Renderer
     
     public void DrawLine(Vec2i start, Vec2i end, int color)
     {
-        Console.WriteLine($"{start} | {end}");
         int d_x = end.X - start.X;
         int d_y = end.Y - start.Y;
         if (Math.Abs(d_y) < Math.Abs(d_x))
@@ -70,30 +69,30 @@ public class Renderer
             }
         }
     }
-
-    public void DrawWiredModel(string path)
+    
+    //TODO: Rotate matrix
+    public void DrawWiredModel(List<Vec3f> model, Mat4x4f transform)
     {
-        var tris = ObjLoader.GetLines(path);
-        int c = 0xFFFFFF;
+        int c = 0x3CBA00;
         Vec2i screen_size = new Vec2i(
             target.Width,
             target.Height
         );
-        for (int i = 0; i < tris.Count; i += 3)
+        for (int i = 0; i < model.Count; i += 3)
         {
             DrawLine(
-                Vec2i.Vec3fToScreenPoint(tris[i], screen_size), 
-                Vec2i.Vec3fToScreenPoint(tris[i+1], screen_size), 
+                Vec2i.Vec3fToScreenPoint(model[i].multMat(transform), screen_size), 
+                Vec2i.Vec3fToScreenPoint(model[i+1].multMat(transform), screen_size), 
                 c
                 );
             DrawLine(
-                Vec2i.Vec3fToScreenPoint(tris[i], screen_size), 
-                Vec2i.Vec3fToScreenPoint(tris[i+2], screen_size), 
+                Vec2i.Vec3fToScreenPoint(model[i].multMat(transform), screen_size), 
+                Vec2i.Vec3fToScreenPoint(model[i+2].multMat(transform), screen_size), 
                 c
             );
             DrawLine(
-                Vec2i.Vec3fToScreenPoint(tris[i+1], screen_size), 
-                Vec2i.Vec3fToScreenPoint(tris[i+2], screen_size), 
+                Vec2i.Vec3fToScreenPoint(model[i+1].multMat(transform), screen_size), 
+                Vec2i.Vec3fToScreenPoint(model[i+2].multMat(transform), screen_size), 
                 c
             );
         }

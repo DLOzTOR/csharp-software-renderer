@@ -22,25 +22,31 @@ class Program
     {
         Image img = new Image(size, size);
         Renderer renderer = new Renderer(img);
-        renderer.DrawWiredModel("Resources/Models/monkey.obj");
-        DrawImage(ref img);
+        List<Vec3f> model = ObjLoader.GetLines("Resources/Models/monkey.obj");
+        Mat4x4f transform = Mat4x4f.CreateIdentity();
+        for (int i = 0; i < 60; i++)
+        {
+            renderer.DrawWiredModel(model, transform);
+            transform.SetRotationY(MathF.PI * i /30);
+            DrawImage(ref img);
+        }
     }
     
     static void SomeTests()
     {
         Image img = new Image(size, size);
         Renderer renderer = new Renderer(img);
-        for (int i = 0; i < size; i += step)
-        {
-            renderer.DrawLine(new Vec2i(0, 0), new Vec2i(100, size - step - i), Color.CreateColor(255, 255, 255));
-            DrawImage(ref img);
-        } 
-
-        for (int i = 0; i < size; i += step)
-        {
-            renderer.DrawLine(new Vec2i(0, 0), new Vec2i(i, 100), Color.CreateColor(255, 255, 255));
-            DrawImage(ref img);
-        } 
+        // for (int i = 0; i < size; i += step)
+        // {
+        //     renderer.DrawLine(new Vec2i(0, 0), new Vec2i(100, size - step - i), Color.CreateColor(255, 255, 255));
+        //     DrawImage(ref img);
+        // } 
+        //
+        // for (int i = 0; i < size; i += step)
+        // {
+        //     renderer.DrawLine(new Vec2i(0, 0), new Vec2i(i, 100), Color.CreateColor(255, 255, 255));
+        //     DrawImage(ref img);
+        // } 
         
         var stopWatch = Stopwatch.StartNew();
         Vec2i v1 = new Vec2i(0, 0);
@@ -51,7 +57,6 @@ class Program
             renderer.DrawLine(v1, v2, color);
         }
         stopWatch.Stop();
-        
         Console.WriteLine($"{stopWatch.ElapsedMilliseconds} ms");
     }
     
